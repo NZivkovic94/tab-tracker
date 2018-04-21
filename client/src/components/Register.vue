@@ -13,22 +13,28 @@
     v-model="password"
     placeholder="password"/>
   <br>
-  <button>Register</button>
+  <button @click = "register">
+    Register
+  </button>
 </div>
 </template>
 
 <script>
+import AuthentificationService from '@/services/AuthentificationService'
 export default {
-  name: 'HelloWorld',
   data () {
     return {
-      email: 'abc',
-      password: '123'
+      email: '',
+      password: ''
     }
   },
-  watch: {
-    email (value) {
-      console.log('email has changed', value)
+  methods: {
+    async register () {
+      const response = await AuthentificationService.register({
+        email: this.email,
+        password: this.password
+      })
+      console.log(response.data)
     }
   }
 }
